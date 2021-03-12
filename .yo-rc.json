@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Pratheesh Russell",
+      "authorEmail": "pratheeshrussell@gmail.com",
+      "authorUrl": "https://pratheeshrussell.github.io/profile/"
+    }
+  }
+}

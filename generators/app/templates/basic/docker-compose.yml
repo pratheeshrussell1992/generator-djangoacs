@@ -1,0 +1,13 @@
+version: '3'
+services:
+  djangoapp:
+    restart: always
+    build: .
+    ports:
+      - "8000:8000"
+    networks:
+      - db_network
+
+networks:
+  db_network:
+ 

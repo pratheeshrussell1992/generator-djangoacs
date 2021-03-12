@@ -1,0 +1,12 @@
+django==3.1.7
+djangorestframework
+djangorestframework-jwt
+gunicorn
+psycopg2
+markdown
+django-filter
+django-cors-headers
+drf-yasg
+django-oauth-toolkit
+django-cors-middleware
+mysqlclient
