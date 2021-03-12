@@ -1,5 +1,5 @@
 import os as dbos
-BASE_DIR_db = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR_db = dbos.path.dirname(dbos.path.dirname(dbos.path.abspath(__file__)))
 
 database_setting = {
     'default': {
