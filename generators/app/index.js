@@ -48,20 +48,20 @@ module.exports = class extends Generator {
   }
 
   writing() {
-   // this.log( "you chose" + this.props.authtypes);
+   this.log( "you chose " + `db/${this.props.databasetypes}/database.py`);
     this.fs.copy(
-      this.templatePath('common/**/*'),
+      this.templatePath(`common/**/*`),
       this.destinationRoot()
     );
     // setup DB
     this.fs.copy(
-      this.templatePath('db/'+this.props.databasetypes+'/database.py'),
-      this.destinationRoot('src/apicore/database.py')
+      this.templatePath(`db/${this.props.databasetypes}/database.py`),
+      this.destinationPath(`src/apicore/database.py`)
     );
      // add db requirements
-    this.fs.copy(
-      this.templatePath('db/'+this.props.databasetypes+'/requirements.txt'),
-      this.destinationRoot('src/db_requirements.txt')
+    this.fs.copyTpl(
+      this.templatePath(`db/${this.props.databasetypes}/requirements.txt`),
+      this.destinationPath(`src/db_requirements.txt`)
     );
   }
 
