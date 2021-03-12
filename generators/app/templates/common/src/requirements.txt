@@ -9,4 +9,4 @@ django-cors-headers
 drf-yasg
 django-oauth-toolkit
 django-cors-middleware
-mysqlclient
+-r db_requirements.txt

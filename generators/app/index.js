@@ -15,8 +15,19 @@ module.exports = class extends Generator {
       choices: [{
         name: 'SQLite',
         value: 'sqlite',
+        checked: false
+       },{
+        name: 'MySQL',
+        value: 'mysql',
         checked: true
-       }]
+       },{
+        name: 'MongoDB',
+        value: 'mongo',
+        checked: false
+       }
+      
+      
+      ]
      },
    {
       type: 'list',
@@ -37,10 +48,20 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.log( "you chose" + this.props.authtypes);
+   // this.log( "you chose" + this.props.authtypes);
     this.fs.copy(
-      this.templatePath('basic/**/*'),
+      this.templatePath('common/**/*'),
       this.destinationRoot()
+    );
+    // setup DB
+    this.fs.copy(
+      this.templatePath('db/'+this.props.databasetypes+'/database.py'),
+      this.destinationRoot('src/apicore/database.py')
+    );
+     // add db requirements
+    this.fs.copy(
+      this.templatePath('db/'+this.props.databasetypes+'/requirements.txt'),
+      this.destinationRoot('src/db_requirements.txt')
     );
   }
 
