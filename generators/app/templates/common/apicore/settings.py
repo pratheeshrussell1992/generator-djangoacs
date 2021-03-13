@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from .database import database_setting, database_apps 
+from .database import database_setting, database_apps
+from .auth_setting import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,8 +40,8 @@ except NameError:
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = SECRET_KEY
-OAUTH_CLIENTID = 'LL82l2q1pkNBRbOaxFJ0N8IKtkALzmDZcWWkn5U1'
-OAUTH_CLIENT_SECRET = 'V0F7FIDXmNkyyR42FkJeITnjkspOXCCa1PufRShArPGdR2PhMSBLGYrAF01j3CURxDMeor7RzukeKU6ED8yTKHMxKS4NZBtBvZu3plC0KmErLQ77qr6PpoGWCLSGF4UU'
+OAUTH_CLIENTID = OAUTH_CLIENTID_SETTING
+OAUTH_CLIENT_SECRET = OAUTH_CLIENT_SETTING
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -75,6 +76,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+INSTALLED_APPS.extend(AUTH_APPS)
 INSTALLED_APPS.extend(database_apps)
 
 
@@ -103,18 +105,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = '<%= project_name %>.urls'
 
 AUTH_USER_MODEL ='user.user'
-REST_FRAMEWORK = { 
-  'DEFAULT_PERMISSION_CLASSES': ( 
-      'rest_framework.permissions.IsAuthenticated', 
-  ), 
-  'DEFAULT_AUTHENTICATION_CLASSES': ( 
-      'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-    #  'rest_framework.authentication.TokenAuthentication',
-   #   'rest_framework_jwt.authentication.JSONWebTokenAuthentication', 
-   #   'rest_framework.authentication.SessionAuthentication', 
-   #   'rest_framework.authentication.BasicAuthentication', 
-  ), 
-} 
+
+SIMPLE_JWT = JWT_SETTING
+REST_FRAMEWORK = REST_FRAMEWORK_PERMISSIONS
 
 TEMPLATES = [
     {

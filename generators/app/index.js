@@ -40,8 +40,13 @@ module.exports = class extends Generator {
       choices: [ {
        name: 'OAuth',
        value: 'oauth',
-       checked: true
-   }]
+       checked: true},
+       {
+        name: 'JWT',
+        value: 'jwt',
+        checked: true}
+  
+  ]
    }
  ];
 
@@ -52,7 +57,6 @@ module.exports = class extends Generator {
   }
 
   writing() {
-   //this.log( "you chose " + `db/${this.props.databasetypes}/database.py`);
     this.fs.copyTpl(
       this.templatePath("common/!(apicore){**/*,*}"),
       this.destinationRoot(),this.props
@@ -71,6 +75,28 @@ module.exports = class extends Generator {
       this.templatePath(`db/${this.props.databasetypes}/requirements.txt`),
       this.destinationPath(`src/requirements.db.txt`)
     );
+
+    //AUTH settings
+    this.fs.copy(
+      this.templatePath(`auth/${this.props.authtypes}/auth_setting.py`),
+      this.destinationPath(`src/${this.props.project_name}/auth_setting.py`)
+    );
+
+    this.fs.copy(
+      this.templatePath(`auth/${this.props.authtypes}/requirements.txt`),
+      this.destinationPath(`src/requirements.auth.txt`)
+    );
+
+    this.fs.copy(
+      this.templatePath(`auth/${this.props.authtypes}/${this.props.authtypes}LoginController.py`),
+      this.destinationPath(`src/modules/user/controllers/${this.props.authtypes}LoginController.py`)
+    );
+
+    this.fs.copy(
+      this.templatePath(`auth/${this.props.authtypes}/urls.py`),
+      this.destinationPath(`src/modules/user/urls.py`)
+    );
+
   }
 
 };
