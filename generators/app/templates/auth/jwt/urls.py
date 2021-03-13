@@ -8,6 +8,6 @@ app_name = Config.app_name
 
 urlpatterns = [
     re_path(r'^register/?$', registerHandler.as_view(), name="register"),
-    path('login/jwt/token/', jwtHandler.as_view(), name='token_obtain_pair'),
-    path('login/jwt/renew/', jwtRefreshHandler.as_view(), name='token_refresh')
+	re_path(r'^login/jwt/token/?$',  jwtHandler.as_view(), name='token_obtain_pair'),
+	re_path(r'^login/jwt/renew/?$',  jwtRefreshHandler.as_view(), name='token_refresh')
 ]

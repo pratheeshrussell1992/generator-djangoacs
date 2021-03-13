@@ -57,17 +57,13 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     # our custom apps
     'modules.user',
-    'modules.sample',
-    #oauth
-    'oauth2_provider',
-    'corsheaders',
+    'modules.sample', 
     # swagger
     'drf_yasg',
     # for rest framework
     'rest_framework', 
-    'rest_framework.authtoken', 
-    'rest_framework_jwt',    
     # default apps
+	'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

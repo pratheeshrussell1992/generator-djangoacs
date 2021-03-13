@@ -37,14 +37,19 @@ module.exports = class extends Generator {
       type: 'list',
       name: 'authtypes',
       message:'What kind of authentication do you want to use?',
-      choices: [ {
+      choices: [ 
+        {
+          name: 'Basic Token Auth',
+          value: 'basic',
+          checked: false}, 
+      {
        name: 'OAuth',
        value: 'oauth',
        checked: true},
        {
         name: 'JWT',
         value: 'jwt',
-        checked: true}
+        checked: false}
   
   ]
    }
