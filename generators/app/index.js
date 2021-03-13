@@ -1,15 +1,19 @@
 'use strict';
 const Generator = require('yeoman-generator');
-const fse = require('fs-extra');
 
 //https://dzone.com/articles/create-your-own-yeoman
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(`Welcome to the Django Template generator for ACS!`);
-
-    var prompts = [{
-      type: 'list',
+    var prompts = [
+      {
+        type: "input",
+        name: "project_name",
+        message: "What is the name of your project?",
+        default: this.appname
+      },
+      {type: 'list',
       name: 'databasetypes',
       message:'Choose your database type?',
       choices: [{
@@ -21,14 +25,14 @@ module.exports = class extends Generator {
         value: 'mysql',
         checked: true
        },{
+        name: 'PostgreSQL',
+        value: 'postgres',
+        checked: false
+       },{
         name: 'MongoDB',
         value: 'mongo',
         checked: false
-       }
-      
-      
-      ]
-     },
+       }]},
    {
       type: 'list',
       name: 'authtypes',
@@ -48,20 +52,24 @@ module.exports = class extends Generator {
   }
 
   writing() {
-   this.log( "you chose " + `db/${this.props.databasetypes}/database.py`);
-    this.fs.copy(
-      this.templatePath(`common/**/*`),
-      this.destinationRoot()
+   //this.log( "you chose " + `db/${this.props.databasetypes}/database.py`);
+    this.fs.copyTpl(
+      this.templatePath("common/!(apicore){**/*,*}"),
+      this.destinationRoot(),this.props
+    );
+    this.fs.copyTpl(
+      this.templatePath(`common/apicore/**/*`),
+      this.destinationPath(`src/${this.props.project_name}`),this.props
     );
     // setup DB
     this.fs.copy(
       this.templatePath(`db/${this.props.databasetypes}/database.py`),
-      this.destinationPath(`src/apicore/database.py`)
+      this.destinationPath(`src/${this.props.project_name}/database.py`)
     );
      // add db requirements
     this.fs.copyTpl(
       this.templatePath(`db/${this.props.databasetypes}/requirements.txt`),
-      this.destinationPath(`src/db_requirements.txt`)
+      this.destinationPath(`src/requirements.db.txt`)
     );
   }
 
