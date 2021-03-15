@@ -51,6 +51,9 @@ if settings.DEBUG:
 		#re_path(r'^oauthapp/', include('oauth2_provider.urls', namespace='oauth2_provider')),
         ]
     urlpatterns.extend(urlpatterns_DEV)
-    if settings.OAUTH_CLIENTID != "":
+    try:
+        import oauthlib
         oautpatterns_DEV = [re_path(r'^oauthapp/', include('oauth2_provider.urls', namespace='oauth2_provider')),]
         urlpatterns.extend(oautpatterns_DEV)
+    except ImportError:
+        pass
