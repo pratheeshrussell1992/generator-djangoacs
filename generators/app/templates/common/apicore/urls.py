@@ -57,3 +57,5 @@ if settings.DEBUG:
         urlpatterns.extend(oautpatterns_DEV)
     except ImportError:
         pass
+    except Exception as exception:
+        pass
