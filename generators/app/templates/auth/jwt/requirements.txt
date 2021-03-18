@@ -1,1 +1,1 @@
-django-oauth-toolkit
+djangorestframework_simplejwt

@@ -7,5 +7,4 @@ markdown
 django-filter
 django-cors-headers
 drf-yasg
-django-oauth-toolkit
 django-cors-middleware
